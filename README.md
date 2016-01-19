@@ -1,1 +1,1 @@
-# Love2D Template
+# Love2D Game Template
