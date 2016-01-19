@@ -1,21 +1,22 @@
 -- Global 'DEBUG' flag
 DEBUG = true
 
-require "utils"
+require 'utils'
 
 -- Install some libraries into the global namespace.
-_ = require "vendor.underscore"
-class = require "vendor.middleclass"
-vector = require "vendor.vector"
-lume = require "vendor.lume"
-Timer = require "vendor.timer"
+_ = require 'vendor.underscore'
+inspect = require 'vendor.inspect'
+class = require 'vendor.middleclass'
+vector = require 'vendor.vector'
+lume = require 'vendor.lume'
+Timer = require 'vendor.timer'
 Signal = require 'vendor.signal'
 Stateful = require 'vendor.stateful'
 Camera  = require 'vendor.camera'
 Actions = require 'vendor.actions'
 debugGraph = require 'vendor.debugGraph'
-assets = require("vendor.cargo").init('assets')
-HC = require "vendor.hc"
+assets = require('vendor.cargo').init('assets')
+HC = require 'vendor.hc'
 
 
 require "src.component" -- Load in components.

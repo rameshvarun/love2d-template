@@ -37,12 +37,17 @@ read GAME_NAME
   cd $OUT_DIR
   cd vendor
 
+  wget -nc https://github.com/kikito/inspect.lua/blob/master/inspect.lua # inspect.lua
+
   wget -nc https://raw.githubusercontent.com/mirven/underscore.lua/master/lib/underscore.lua # underscore.lua
+
   wget -nc https://raw.githubusercontent.com/Mechazawa/Love-Debug-Graph/master/debugGraph.lua # debugGraph.lua
 
+  # Object-Oriented Programming Tools
   wget -nc https://raw.githubusercontent.com/kikito/middleclass/master/middleclass.lua # middleclass
   wget -nc https://raw.githubusercontent.com/kikito/stateful.lua/master/stateful.lua # stateful.lua
 
+  # Utilities by rxi
   wget -nc https://raw.githubusercontent.com/rxi/lume/master/lume.lua # lume
   wget -nc https://raw.githubusercontent.com/rxi/lurker/master/lurker.lua # lurker
   wget -nc https://raw.githubusercontent.com/rxi/lovebird/master/lovebird.lua # lovebird
@@ -53,8 +58,10 @@ read GAME_NAME
   wget -nc https://raw.githubusercontent.com/vrld/hump/master/vector.lua # hump.vector
   wget -nc https://raw.githubusercontent.com/vrld/hump/master/camera.lua # hump.camera
 
+  # Composable Actions / Animations
   wget -nc https://raw.githubusercontent.com/rameshvarun/hump.timer.actions/master/actions.lua # hump.timer.actions
 
+  # Asset Management / Caching
   wget -nc  https://raw.githubusercontent.com/bjornbytes/cargo/master/cargo.lua # cargo
 
   # HardonCollider
