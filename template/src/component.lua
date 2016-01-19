@@ -31,4 +31,4 @@ function Component:debugOverlay() end
 function Component:update(dt) end
 
 -- Load in all of the components.
-util.require_dir("src/components", true)
+require_dir "src/components"

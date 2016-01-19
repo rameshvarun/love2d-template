@@ -1,5 +1,7 @@
 GameState = class('GameState')
 
+GameState.static.debugFont = love.graphics.newFont(12)
+
 -- Store the current, active GameState in a static variable.
 GameState.static.currentState = nil
 -- Static method to switch to a game state.
@@ -74,7 +76,7 @@ function GameState:draw()
 
   if DEBUG then
     love.graphics.setColor(255, 255, 255, 255)
-    love.graphics.setFont(assets.fonts.vera(12))
+    love.graphics.setFont(GameState.debugFont)
     local worldx, worldy =  self.cam:mousePosition()
     love.graphics.print("Mouse Position (World): " .. worldx .. ", " .. worldy, 0, 80)
   end
@@ -114,4 +116,4 @@ function GameState:getEntitiesByTag(tag)
   return entities
 end
 
-util.require_dir("src/states", true)
+require_dir "src/states"

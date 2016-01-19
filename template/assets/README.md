@@ -1,2 +1,2 @@
 # Assets
-Assets folder.
+The assets folder.

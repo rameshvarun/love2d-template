@@ -65,7 +65,7 @@ to it. Returns the component for compositional purposes. ]]--
 function Entity:includeComponent(comp)
   self:addComponent(comp) -- Add the component, so that it's draw, update, etc. functions will be called.
   for key, value in pairs(comp.class.__instanceDict) do
-    if type(value) == "function" and not string_utils.starts(key, "__") and
+    if type(value) == "function" and not key:startsWith("__") and
       key ~= "draw" and key ~= "debugDraw" and key ~= "overlay" and
       key ~= "debugOverlay" and key ~= "update" and key ~= "initialize" then
         self[key] = function(_, ...)
@@ -114,4 +114,4 @@ end
 
 function Entity:destroy() self.dead = true end -- Mark this entity for removal.
 
-util.require_dir("src/entities", true)
+require_dir "src/entities"
