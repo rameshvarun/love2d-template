@@ -4,6 +4,9 @@ IFS=$'\n\t'
 
 # Set the output directory.
 OUT_DIR="out/"
+if [ $# -ge 1 ]; then
+  OUT_DIR=$1
+fi
 
 if [ -d "$OUT_DIR" ]; then
   echo "$OUT_DIR already exists. Delete it and try again."
