@@ -21,6 +21,8 @@ read GAME_NAME
   cd $OUT_DIR
   cat conf.lua | sed -e "s:\${game_id}:$GAME_ID:g" | sed -e "s:\${game_name}:$GAME_NAME:g" > conf.lua.tmp
   mv conf.lua.tmp conf.lua
+  cat README.md | sed -e "s:\${game_name}:$GAME_NAME:g" > README.md.tmp
+  mv README.md.tmp README.md
 )
 
 (

@@ -30,7 +30,7 @@ function love.load(arg)
   FPSGraph = debugGraph:new('fps', 0, 0)
   MemGraph = debugGraph:new('mem', 0, 40)
 
-  -- GameState.switchTo(GameState())
+  GameState.switchTo(GameState())
 end
 
 function love.draw()
