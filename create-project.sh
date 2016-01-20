@@ -37,7 +37,7 @@ read GAME_NAME
   cd $OUT_DIR
   cd vendor
 
-  wget -nc https://github.com/kikito/inspect.lua/blob/master/inspect.lua # inspect.lua
+  wget -nc https://raw.githubusercontent.com/kikito/inspect.lua/master/inspect.lua # inspect.lua
 
   wget -nc https://raw.githubusercontent.com/mirven/underscore.lua/master/lib/underscore.lua # underscore.lua
 
