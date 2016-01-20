@@ -17,7 +17,7 @@ assets = require('vendor.cargo').init('assets') -- Cargo, for asset management.
 HC = require 'vendor.hc' -- HardonCollider, for collision detection.
 
 require 'utils' -- Load in utilities.
-require "src.color" -- Load color library.
+Color = require "src.color" -- Load color library.
 
 require "src.component" -- Load in components.
 require "src.entity" -- Load in entities.
