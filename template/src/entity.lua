@@ -15,7 +15,7 @@ function Entity:initialize(tag, layer, pos)
   -- Argument type checking.
   assert(type(tag) == "string", "'tag' must be a string.")
   assert(type(layer) == "number", "'layer' must be a number.")
-  assert(isvector(pos), "'pos' must be a vector. ")
+  assert(vector.isvector(pos), "'pos' must be a vector. ")
 
   self.id = Entity.generateID() -- Generate a random ID.
 

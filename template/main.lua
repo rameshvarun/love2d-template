@@ -1,37 +1,33 @@
 -- Global 'DEBUG' flag
 DEBUG = true
 
-require 'utils'
-
 -- Install some libraries into the global namespace.
-_ = require 'vendor.underscore'
-inspect = require 'vendor.inspect'
-class = require 'vendor.middleclass'
-vector = require 'vendor.vector'
-lume = require 'vendor.lume'
-Timer = require 'vendor.timer'
-Signal = require 'vendor.signal'
-Stateful = require 'vendor.stateful'
-Camera  = require 'vendor.camera'
-Actions = require 'vendor.actions'
-debugGraph = require 'vendor.debugGraph'
-assets = require('vendor.cargo').init('assets')
-HC = require 'vendor.hc'
+_ = require 'vendor.underscore' -- Underscore.lua, for misc. functional programming utils.
+inspect = require 'vendor.inspect' -- Inspect.lua, for pretty printing tables.
+class = require 'vendor.middleclass' -- Middleclass, for following OOP patterns.
+vector = require 'vendor.vector' -- HUMP.vector, for the vector primitive.
+lume = require 'vendor.lume' -- LUME, for misc utilties.
+Timer = require 'vendor.timer' -- HUMP.timer, for delayed events and tweening.
+Signal = require 'vendor.signal' -- HUMP.signal, for the observer pattern.
+Stateful = require 'vendor.stateful' -- Stateful.lua, for state-based classes.
+Camera  = require 'vendor.camera' -- HUMP.camera for a camera abstraction.
+Actions = require 'vendor.actions' -- HUMP.timer.actions, for composable actions.
+debugGraph = require 'vendor.debugGraph' -- debugGraph, for FPS and Memory graphs.
+assets = require('vendor.cargo').init('assets') -- Cargo, for asset management.
+HC = require 'vendor.hc' -- HardonCollider, for collision detection.
 
+require 'utils' -- Load in utilities.
+require "src.color" -- Load color library.
 
 require "src.component" -- Load in components.
 require "src.entity" -- Load in entities.
-require "src.gamestate" -- Load in game states.
-
-require_dir "script/" -- Load in script.
-require_dir "src/combat" -- Load in combat stuff.
+require "src.gamestate" -- Load in gamestates.
 
 function love.load(arg)
   -- Debug graphs.
   FPSGraph = debugGraph:new('fps', 0, 0)
   MemGraph = debugGraph:new('mem', 0, 40)
-
-  GameState.switchTo(GameState())
+  GameState.switchTo(GameState()) -- Switch to an empty gamestate.
 end
 
 function love.draw()
