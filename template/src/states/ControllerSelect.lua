@@ -152,8 +152,16 @@ function ControllerSelect:update(dt)
     end
 
     if ready then
-      print("All players are ready.")
-      if self.continuation ~= nil then self.continuation() end
+      print("All players are ready...")
+      local bindings = {}
+      for _, card in ipairs(self.cards) do
+        if card:isReady() then
+          table.insert(bindings, card.binding)
+        end
+      end
+      if self.continuation ~= nil then
+        self.continuation(bindings)
+      end
     end
   end
 end
