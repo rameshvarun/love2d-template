@@ -21,6 +21,10 @@ function Color:use() love.graphics.setColor(self.r, self.g, self.b, self.a) end
 
 Color.static.WHITE = Color(255, 255, 255, 255)
 Color.static.BLACK = Color(0, 0, 0, 255)
+
+Color.static.GREY = Color(128, 128, 128, 255)
+Color.static.GRAY = Color.static.GREY
+
 Color.static.TRANSPARENT = Color(0, 0, 0, 0)
 
 Color.static.RED = Color(255, 0, 0, 255)

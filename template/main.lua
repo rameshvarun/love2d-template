@@ -1,6 +1,8 @@
 -- Global 'DEBUG' flag
 DEBUG = true
 
+require 'utils' -- Load in utilities.
+
 -- Install some libraries into the global namespace.
 _ = require 'vendor.underscore' -- Underscore.lua, for misc. functional programming utils.
 inspect = require 'vendor.inspect' -- Inspect.lua, for pretty printing tables.
@@ -16,18 +18,18 @@ debugGraph = require 'vendor.debugGraph' -- debugGraph, for FPS and Memory graph
 assets = require('vendor.cargo').init('assets') -- Cargo, for asset management.
 HC = require 'vendor.hc' -- HardonCollider, for collision detection.
 
-require 'utils' -- Load in utilities.
-Color = require "src.color" -- Load color library.
+Color = require 'src.color' -- Load in the color library.
+input = require 'src.input' -- Load in the input handling library.
 
 require "src.component" -- Load in components.
 require "src.entity" -- Load in entities.
-require "src.gamestate" -- Load in gamestates.
+require "src.gamestate" -- Load in game states.
 
 function love.load(arg)
   -- Debug graphs.
   FPSGraph = debugGraph:new('fps', 0, 0)
   MemGraph = debugGraph:new('mem', 0, 40)
-  GameState.switchTo(GameState()) -- Switch to an empty gamestate.
+  GameState.switchTo(GameState()) -- Switch to controller select menu.
 end
 
 function love.draw()
@@ -58,16 +60,10 @@ function love.update(dt)
   end
 end
 
+-- Use 'f1' to toggle DEBUG
 function love.keypressed(key, isrepeat)
-  if key == 'f1' then
-    DEBUG = not DEBUG
+  if key == 'f1' then DEBUG = not DEBUG
   elseif GameState.currentState ~= nil then
     GameState.currentState:keypressed(key, isrepeat)
-  end
-end
-
-function love.mousereleased(...)
-  if GameState.currentState ~= nil then
-    GameState.currentState:mousereleased(...)
   end
 end

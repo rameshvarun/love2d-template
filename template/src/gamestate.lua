@@ -1,5 +1,6 @@
 GameState = class('GameState')
 
+-- Font used for debug information.
 GameState.static.debugFont = love.graphics.newFont(12)
 
 -- Store the current, active GameState in a static variable.
@@ -14,6 +15,20 @@ function GameState.static.switchTo(state)
   -- Transition to the new state and invoke the 'enter' function.
   GameState.static.currentState = state
   GameState.static.currentState:enter()
+end
+
+-- Make callbacks redirect to the current GameState
+local CALLBACKS = {'directorydropped', 'errhand', 'filedropped', 'focus', 'keypressed', 'keyreleased',
+  'lowmemory', 'mousefocus', 'mousemoved', 'mousepressed', 'mousereleased', 'quit', 'resize', 'textedited',
+  'textinput', 'threaderror', 'touchmoved', 'touchpressed', 'touchreleased', 'visible', 'wheelmoved',
+  'joystickadded', 'joystickaxis', 'joystickhat', 'joystickpressed', 'joystickreleased', 'joystickremoved',
+  'gamepadaxis', 'gamepadpressed', 'gamepadreleased'}
+for _, callback in ipairs(CALLBACKS) do
+  love[callback] = function(...)
+    if GameState.currentState ~= nil then
+      GameState.currentState[callback](GameState.currentState, ...)
+    end
+  end
 end
 
 -- Default draw order for entities.
@@ -33,8 +48,8 @@ function GameState:initialize()
   self.cam = Camera.new() -- Camera for the scene.
   self.entities = {} -- A list of entities in the scene.
   self.signals = Signal.new() -- A signal dispatcher.
-  self.collider = HC.new()
-  self.time = 0
+  self.collider = HC.new() -- A collision detection 'world'.
+  self.time = 0 -- Global time measure.
 end
 
 function GameState:update(dt)
@@ -74,6 +89,7 @@ function GameState:draw()
     end
   end
 
+  -- Draw debug information.
   if DEBUG then
     love.graphics.setColor(255, 255, 255, 255)
     love.graphics.setFont(GameState.debugFont)
@@ -91,10 +107,11 @@ function GameState:addEntity(entity)
 end
 
 -- Input events.
-function GameState:keypressed(...) self.signals.emit('keypressed', ...) end
-function GameState:keyreleased(...) self.signals.emit('keyreleased', ...) end
-function GameState:mousepressed(...) self.signals.emit('mousepressed', ...) end
-function GameState:mousereleased(...) self.signals.emit('mousereleased', ...) end
+for _, callback in ipairs(CALLBACKS) do
+  GameState[callback] = function(self, ...)
+    self.signals.emit(callback, ...)
+  end
+end
 
 -- Empty enter and exit functions.
 function GameState:enter() end
