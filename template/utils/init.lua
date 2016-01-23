@@ -1,4 +1,5 @@
-require "utils.string_utils"
+require "utils.string_utils" -- Load in string libraries.
+require "utils.litlua" -- Install literate lua loader.
 
 --[[ Requires all of the lua scripts in a given directory
 The 2nd argument specifies whether or not to descend recursively.
