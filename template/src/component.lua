@@ -8,6 +8,7 @@ end
 
 -- Overridable callback, invoked after the component is added to an entity.
 function Component:start() end
+function Component:destroy() end
 
 -- Get and set the owning entity of this component.
 function Component:setEntity(entity) self.entity = entity end

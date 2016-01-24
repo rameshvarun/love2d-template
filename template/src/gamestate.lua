@@ -33,14 +33,12 @@ end
 
 -- Default draw order for entities.
 function GameState.static.defaultDrawOrder(a, b)
-	if a.layer == b.layer then -- If the layers are equal, try to sort by y-position.
+  if a.layer == b.layer then -- If the layers are equal, try to sort by y-position.
     if math.abs(a.pos.y - b.pos.y) < 0.01 then
       -- If the positions are very similar, sort by id (just to get some determinism).
       return a.id < b.id
-    else
-      return a.pos.y < b.pos.y
-    end
-	else return a.layer < b.layer end
+    else return a.pos.y < b.pos.y end
+  else return a.layer < b.layer end
 end
 
 function GameState:initialize()
@@ -107,9 +105,7 @@ end
 
 -- Input events.
 for _, callback in ipairs(CALLBACKS) do
-  GameState[callback] = function(self, ...)
-    self.signals.emit(callback, ...)
-  end
+  GameState[callback] = function(self, ...) self.signals.emit(callback, ...) end
 end
 
 -- Empty enter and exit functions.

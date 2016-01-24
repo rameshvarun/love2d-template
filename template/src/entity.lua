@@ -34,8 +34,11 @@ function Entity:initialize(tag, layer, pos)
   self.gameState = nil -- Reference to the owning gamestate. Starts out as nil.
 end
 
--- Invoked after an entity has been added to a GameState.
-function Entity:start() end
+-- Invoked after an entity has been added to a GameState. By default, it simply invokes start
+-- on all of the components that have been added to this object.
+function Entity:start()
+	for _, comp in ipairs(self.components) do comp:start() end
+end
 
 -- Getters for values that shouldn't be changed after an entity's contruction.
 function Entity:getTag() return self.tag end
@@ -73,14 +76,13 @@ end
 'Installs' a component into the current object by delegating all methods
 to it. Returns the component for compositional purposes. ]]--
 function Entity:includeComponent(comp)
+  local KEY_BLACKLIST = { 'draw', 'debugDraw', 'overlay', 'debugOverlay', 'update', 'initialize', 'destroy', 'start' }
   self:addComponent(comp) -- Add the component, so that it's draw, update, etc. functions will be called.
   for key, value in pairs(comp.class.__instanceDict) do
-    if type(value) == "function" and not key:startsWith("__") and
-      key ~= "draw" and key ~= "debugDraw" and key ~= "overlay" and
-      key ~= "debugOverlay" and key ~= "update" and key ~= "initialize" then
-        self[key] = function(_, ...)
-          return comp[key](comp, ...)
-        end
+    if type(value) == "function" and not key:startsWith("__") and not _.include(KEY_BLACKLIST, key) then
+      self[key] = function(_, ...)
+        return comp[key](comp, ...)
+      end
     end
   end
   return comp -- Return the component.
@@ -122,7 +124,12 @@ function Entity:update(dt)
   end
 end
 
-function Entity:destroy() self.dead = true end -- Mark this entity for removal.
+-- Mark this entity for removal, and destroy all components.
+function Entity:destroy()
+  self.dead = true
+  for _, comp in ipairs(self.components) do comp:destroy() end
+end
+
 function Entity:isDead() return self.dead end -- Check if this entity has been marked for removal.
 
 require_dir "src/entities"
