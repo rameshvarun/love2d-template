@@ -1,6 +1,6 @@
 --[[ PhysicsWorld mixin. This mixin can be included into GameStates to allow for the
 convenient creation and manipulation of a love.physics World object. ]]--
-local PhysicsWorld = {
+PhysicsWorld = {
   -- Call this to initialize the physics world.
   createPhysicsWorld = function(self, gravity, sleep)
     assert(vector.isvector(gravity), 'gravity is a vector')
@@ -11,4 +11,3 @@ local PhysicsWorld = {
   --  Get the physics world object.
   getPhysicsWorld = function(self) return self.world end
 }
-return PhysicsWorld

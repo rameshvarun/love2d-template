@@ -21,7 +21,7 @@ HC = require 'vendor.hc' -- HardonCollider, for collision detection.
 Color = require 'src.color' -- Load in the color library.
 input = require 'src.input' -- Load in the input handling library.
 
-require_dir "src/mixins"
+require_dir "src/mixins" -- Load in mixins.
 require "src.component" -- Load in components.
 require "src.entity" -- Load in entities.
 require "src.gamestate" -- Load in game states.

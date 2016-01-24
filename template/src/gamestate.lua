@@ -48,7 +48,6 @@ function GameState:initialize()
   self.cam = Camera.new() -- Camera for the scene.
   self.entities = {} -- A list of entities in the scene.
   self.signals = Signal.new() -- A signal dispatcher.
-  self.collider = HC.new() -- A collision detection 'world'.
   self.time = 0 -- Global time measure.
 end
 
