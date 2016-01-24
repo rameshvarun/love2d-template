@@ -18,7 +18,7 @@ function GameState.static.switchTo(state)
 end
 
 -- Make callbacks redirect to the current GameState
-local CALLBACKS = {'directorydropped', 'errhand', 'filedropped', 'focus', 'keypressed', 'keyreleased',
+local CALLBACKS = {'directorydropped', 'filedropped', 'focus', 'keypressed', 'keyreleased',
   'lowmemory', 'mousefocus', 'mousemoved', 'mousepressed', 'mousereleased', 'quit', 'resize', 'textedited',
   'textinput', 'threaderror', 'touchmoved', 'touchpressed', 'touchreleased', 'visible', 'wheelmoved',
   'joystickadded', 'joystickaxis', 'joystickhat', 'joystickpressed', 'joystickreleased', 'joystickremoved',
