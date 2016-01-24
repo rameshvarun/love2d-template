@@ -37,6 +37,16 @@ end
 -- Invoked after an entity has been added to a GameState.
 function Entity:start() end
 
+-- Getters for values that shouldn't be changed after an entity's contruction.
+function Entity:getTag() return self.tag end
+function Entity:getID() return self.id end
+
+-- Getters and setters for mutable properties.
+function Entity:getLayer() return self.layer end
+function Entity:getPos() return self.pos end
+function Entity:setLayer(layer) self.layer = layer end
+function Entity:setPos(pos) self.pos = pos end
+
 -- Show and hide this entity.
 function Entity:hide() self.visible = false end
 function Entity:show() self.visible = true end
@@ -59,7 +69,7 @@ function Entity:addComponent(comp)
   return comp -- Return the component.
 end
 
---[[ BEWARE: Not very well tested.
+--[[ BEWARE: Not sure if this should be used.
 'Installs' a component into the current object by delegating all methods
 to it. Returns the component for compositional purposes. ]]--
 function Entity:includeComponent(comp)
@@ -113,5 +123,6 @@ function Entity:update(dt)
 end
 
 function Entity:destroy() self.dead = true end -- Mark this entity for removal.
+function Entity:isDead() return self.dead end -- Check if this entity has been marked for removal.
 
 require_dir "src/entities"
