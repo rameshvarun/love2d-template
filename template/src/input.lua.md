@@ -1,7 +1,7 @@
 # Input Handling Library
 This is a input handling library, inspired by [tesselode/tactile](https://github.com/tesselode/tactile). I decided to make my own library for a couple reasons. First, I wanted axes to be real values in `[0, 1]`, whereas, in tactile, axes are in `[-1, 1]`. Second, I didn't like that joysticks were identified by their index in the joysticks array, which can technically change throughout the game if joysticks are inserted and removed.
 
-Additionally, note that this library is written in [literate programming](https://en.wikipedia.org/wiki/Literate_programming) style, so this markdown file is both the documentation of the libary, and the actual code of the module.
+Additionally, note that this library is written in [literate programming](https://en.wikipedia.org/wiki/Literate_programming) style, so this markdown file is both the documentation of the library, and the actual code of the module.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
