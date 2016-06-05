@@ -1,29 +1,46 @@
---[[
-This is a card entitiy, used by the ControllerSelect GameState to show information.
+# DeviceCard Entity
+
+This entitiy is used in the `ControllerSelect` GameState to show information about players that are trying to join a game.
 
 It's a fairly complex state machine, which has the following possible states:
-Unfilled - No input device has been assigned to this card yet.
-Joining - An input device has been assigned to this card, but we want the player to hold the button down
-  for a second, in order to confirm that this wasn't a mistake.
-Joined - An input device has been assigned to this card, and the device is fully bound.
-Binding - Slots in the binding are in the process if being assigned.
-]]--
+- Unfilled - No input device has been assigned to this card yet.
+- Joining - An input device has been assigned to this card, but we want the player to hold the button down for a second, in order to confirm that this wasn't a mistake.
+- Joined - An input device has been assigned to this card, and the device is fully bound.
+- Binding - Slots in the binding are in the process if being assigned.
 
+## Prelude
+This class is defined using [middleclass](https://github.com/kikito/middleclass). Since it's behaviour is best thought of as a state machine, we can use [stateful.lua](https://github.com/kikito/stateful.lua).
+
+```lua
 DeviceCard = class('DeviceCard', Entity)
 DeviceCard:include(Stateful)
+```
+
+```lua
+-- The width and height of the card.
 DeviceCard.static.WIDTH = 200
 DeviceCard.static.HEIGHT = 280
+
 DeviceCard.static.MARGIN = 20
+
+-- Fonts used for various texts on the card.
 DeviceCard.static.TITLE_FONT = love.graphics.newFont(20)
 DeviceCard.static.DESC_FONT = love.graphics.newFont(15)
 DeviceCard.static.MID_FONT = love.graphics.newFont(16)
-DeviceCard.static.JOIN_TIME = 1.0
+
+DeviceCard.static.JOIN_TIME = 1.0 -- How long one must hold a button to
 DeviceCard.static.BIND_TIME = 1.0
 DeviceCard.static.CURSOR_SPEED = 200
+```
+
+```lua
 function DeviceCard:initialize(pos)
   Entity.initialize(self, 'devicecard', 0, pos)
   self:gotoState('Unfilled')
 end
+```
+
+```lua
 function DeviceCard:draw()
   Entity.draw(self)
   Color.WHITE:use()
@@ -31,7 +48,10 @@ function DeviceCard:draw()
 end
 function DeviceCard:hasJoined() return false end
 function DeviceCard:isReady() return false end
+```
 
+## Unfilled Cards
+```lua
 local UnfilledState = DeviceCard:addState('Unfilled')
 function UnfilledState:enteredState()
   if self.inputName then
@@ -46,7 +66,10 @@ function UnfilledState:draw()
   love.graphics.printf("Hold any key or button to join...", self.pos.x + DeviceCard.MARGIN,
     self.pos.y  + DeviceCard.HEIGHT * 0.25, DeviceCard.WIDTH - DeviceCard.MARGIN * 2, "center")
 end
+```
 
+## Joining Cards
+```lua
 local JoiningState = DeviceCard:addState('Joining')
 function JoiningState:enteredState(inputType, inputID, inputName, joinButton)
   self.inputType = inputType
@@ -333,3 +356,4 @@ function BindingState:draw()
     love.graphics.setLineWidth(1)
   end
 end
+```
